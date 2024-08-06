@@ -5,7 +5,7 @@ url = 'https://apis.codante.io/olympic-games/countries'
 flags_dir = 'flags'
 
 # Create directory for flags if it doesn't exist
-os.makedirs(flags_dir, exist_ok=True)
+
 
 print("Fetching data")
 response = requests.get(url)
