@@ -1,11 +1,12 @@
 import tweepy
-import time
+import os
+import json
 
-api_key="sBxMgMF6blOiAmJbaXtbC7bat"
-api_secret="lF8V4VlzZLMGLA0VkWQxUROXrJ2z0gSeZY2Ozc7ljeBDs2lNTe"
-bearer_token=r"AAAAAAAAAAAAAAAAAAAAABHpvAEAAAAABpYHWBipROsziSBBUicFKRelD68%3D4NqEscn1fr92fRpttW0IaIxDzQ0LYqMTwYFAemZKufioab7YCV"
-access_token="1820868688284696576-9JEzBnn2gFy9xv8NSP83EsskiPELo3"
-access_token_secret="SHkSJ04s4PMKxVTog1eZBAliWtLSQq1xQ6HLs6OusatWh"
+api_key= os.getenv('API_KEY')
+api_secret=os.getenv('API_SECRET')
+bearer_token=  os.getenv('BEARER_TOKEN')
+access_token= os.getenv('ACCESS_TOKEN')
+access_token_secret= os.getenv('ACCESS_TOKEN_SECRET')
 
 client=tweepy.Client(bearer_token,api_key,api_secret,access_token,access_token_secret)
 auth = tweepy.OAuth1UserHandler(
@@ -15,6 +16,21 @@ auth = tweepy.OAuth1UserHandler(
 
 
 api=tweepy.API(auth)
-#First tweet
-client.create_tweet(text="Hi!")
+
+
+with open('medal_data.json', 'r') as f:
+    medal_data = json.load(f)
+
+# Select the top 10 countries
+top_countries = list(medal_data.items())[:18]
+
+# Prepare the tweet text
+tweet_text = "Gold medal tally\n" + "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
+
+# Post the tweet with the text
+response = client.create_tweet(text=tweet_text)
+if response:
+    print("Tweet posted successfully.")
+else:
+    print("Failed to post tweet.")
  
