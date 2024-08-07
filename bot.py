@@ -24,18 +24,18 @@ api = tweepy.API(auth)
 
 
 
-# # Load medal data
-# with open('medal_data.json', 'r') as f:
-#     medal_data = json.load(f)
+# Load medal data
+with open('medal_data.json', 'r') as f:
+    medal_data = json.load(f)
 
-# # Select the top 10 countries
-# top_countries = list(medal_data.items())[:15]  # Fetching top 15 s
+# Select the top 10 countries
+top_countries = list(medal_data.items())[:15]  # Fetching top 15 s
 
-# # Prepare the tweet text
-# tweet_text = "#Paris2024\n"+ "#Olympics2024\n"  + "#Olympics2024Paris\n" +"Gold Medals tally\n"+ "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
+# Prepare the tweet text
+tweet_text = "#Paris2024\n"+ "#Olympics2024\n"  + "#Olympics2024Paris\n" +"Gold Medals tally\n"+ "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
 
-# # Post the tweet with the text
-# response = client.create_tweet(text=tweet_text)
+# Post the tweet with the text
+response = client.create_tweet(text=tweet_text)
 
 
 
