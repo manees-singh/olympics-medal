@@ -2,7 +2,7 @@ name: Run Twitter Bot
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Every 6 hours
+    - cron: '*/15 * * * *' # Every 30 minutes
   workflow_dispatch:
 
 jobs:
