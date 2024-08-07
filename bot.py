@@ -22,7 +22,7 @@ with open('medal_data.json', 'r') as f:
     medal_data = json.load(f)
 
 # Select the top 10 countries
-top_countries = list(medal_data.items())[:18]
+top_countries = list(medal_data.items())[:20]
 
 # Prepare the tweet text
 tweet_text = "Gold medal tally\n" + "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
