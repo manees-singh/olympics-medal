@@ -28,7 +28,7 @@ with open('medal_data.json', 'r') as f:
 top_countries = list(medal_data.items())[:10]  # Fetching top 10 instead of 20
 
 # Prepare the tweet text
-tweet_text = "Gold medal tally\n" + "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
+tweet_text = "#Paris2024\n"+ "#Olympics2024\n" +"#Olympics2024\n" + "#Olympics2024Paris\n" + "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
 
 # Post the tweet with the text
 response = client.create_tweet(text=tweet_text)
