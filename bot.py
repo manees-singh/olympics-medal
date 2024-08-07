@@ -31,11 +31,8 @@ top_countries = list(medal_data.items())[:10]  # Fetching top 10 instead of 20
 tweet_text = "Gold medal tally\n" + "\n".join([f"{country_id}: {data[0]}" for country_id, data in top_countries])
 
 # Post the tweet with the text
-try:
-    response = client.create_tweet(text=tweet_text)
-    print("Tweet sent successfully:", response)
-except tweepy.TweepError as e:
-    print("Error sending tweet:", e)
+response = client.create_tweet(text=tweet_text)
+
 
 
 
