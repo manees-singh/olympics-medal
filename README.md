@@ -1,5 +1,5 @@
 # Olympics Medal Tracker Bot 
-[olympics_24](https://x.com/olympics_24)
+[𝕏/olympics_24](https://x.com/olympics_24)
 
 This project contains a Python-based Twitter bot that tracks Olympic medals and posts regular updates on Twitter. The bot scrapes data from an API and formats it for a Twitter post, displaying the top-performing countries with their respective medal counts and flag emojis.
 
