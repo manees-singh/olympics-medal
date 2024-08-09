@@ -1,29 +1,34 @@
 import requests
 import os
+import json
 
+#URL for the API
 url = 'https://apis.codante.io/olympic-games/countries'
-flags_dir = 'flags'
 
-# Create directory for flags if it doesn't exist
-if not os.path.exists(flags_dir):
-    os.makedirs(flags_dir)
 
-print("Fetching data")
+
+#using requests to fetch data from the API
 response = requests.get(url)
 
+
+#checks if the url responds to the request
 if response.status_code == 200:
     data = response.json()
     
-    # Extract and download country flags
+    # Extract the data 
     countries = data['data']
+
+    #initiate the dictionary to store the data
     medal_data = {} 
 
-
+    #Loops for every data point in the original data to create a nested dictionary
     for country in countries:
         medal_data[country['id']]={'gold':country['gold_medals'],'silver':country['silver_medals'],'bronze':country['bronze_medals'],'total':country['total_medals']}
 
+
+    #function to create emoji from the country id
     def country_flag_emoji(country_code):
-        alpha3_to_alpha2 = {
+        alpha3_to_alpha2 = {  #assigns alpha 2 value for the alpha 3 notation of the country ids
         "USA": "US", "CHN": "CN", "AUS": "AU", "FRA": "FR", "GBR": "GB", 
         "KOR": "KR", "JPN": "JP", "NED": "NL", "ITA": "IT", "GER": "DE", 
         "CAN": "CA", "NZL": "NZ", "IRL": "IE", "ROU": "RO", "UKR": "UA", 
@@ -35,90 +40,37 @@ if response.status_code == 200:
         "ARG": "AR", "CHI": "CL", "LCA": "LC", "UGA": "UG", "TPE": "TW",
         "BUL": "BG", "AUT": "AT", "GUA": "GT", "MAR": "MA", "UZB": "UZ"
     }
-        
+        # assigning alpha 2 value
         alpha2_code = alpha3_to_alpha2.get(country_code.upper())
         if not alpha2_code:
             return None
 
-
+        # creates the emoji character out of all the alpha 2 characters
         flag_emoji=chr(ord(alpha2_code[0]) + 127397) + chr(ord(alpha2_code[1]) + 127397)
         return flag_emoji
     
-    # for country in countries:
-    #     flag_url = country['flag_url']
-    #     flag_response = requests.get(flag_url)
-    #     flag_path = os.path.join(flags_dir, f"{country['id']}.png")
-        
-    #     with open(flag_path, 'wb') as f:
-    #         f.write(flag_response.content)
-        
-    #     medal_data[country['id']] = [country['gold_medals'], flag_path]
 
-    # Save medal_data to a file (e.g., JSON) if needed
-    # Example: save to medal_data.json
-    # import json
-    # with open('medal_data.json', 'w') as f:
-    #     json.dump(medal_data, f)
+
+    #runs the function for all the country ids from extracted dictionary items
+    for country_code, country_data in medal_data.items():
+        flag_emoji = country_flag_emoji(country_code)
+        if flag_emoji:
+            country_data['flag_emoji'] = flag_emoji # if country ids matches for the alpha2 characters, an emoji is assigned
+        else:
+            country_data['flag_emoji'] = '🏳'  # oplaceholder for non matching country ids
+
+    
+
+  
 else:
     print("Failed to fetch data")
 
-
-
-print(medal_data)
     
-
-#medal_data={}
-
-# for country in countries:
-#     flag_url=country['flag_url']
-#     get_flag=requests.get(flag_url)
-#     flag=get_flag.content
-#     medal_data[country['id']]=[country['gold_medals'],flag]
-
-# for i,j in medal_data.items():
-#     print(f"{i}:{j[0]}") 
-
-#     for country in countries:
-#         name = country['name']
-#         flag_url = country['flag_url']
-        
-        
-#         flag_response = requests.get(flag_url)
-#         if flag_response.status_code == 200:
-#             flag_path = os.path.join(flags_dir, f"{country['id']}.png")
-#             with open(flag_path, 'wb') as f:
-#                 f.write(flag_response.content)
-#             print(f"Flag for {name} saved to {flag_path}")
-#         else:
-#             print(f"Failed to download flag for {name}")
-
-#     print('Fetched')
-# else:
-#     print(f"Failed to fetch data: {response.status_code}")
+#creates a json file to store all the dictionary data to be used by the bot file
+with open('medal_data.json', 'w') as f:
+    json.dump(medal_data, f)
 
 
 
-
-
-
-
-#this is beautifulsoup file. 
-# from bs4 import BeautifulSoup
-# import requests
-
-# url= 'https://olympics.com/en/paris-2024?utm_campaign=dp_microsoft'
-
-
-# print("fetching data")
-# html=requests.get(url)
-# data=html.json()
-# countries=data['data']
-# for country in countries:
-#     name = country['name']
-#     flag_url = country['flag_url']
-#     print(f"Country: {name}, Flag URL: {flag_url}")
-
-#     # print(f"{country['flag_url']}:{country['gold_medals']}")
-# print('fetched')
 
 
