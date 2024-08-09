@@ -43,7 +43,7 @@ tweet_content= "#Olympics2024\n#Paris2024\n\n           🥇     🥈    🥉   
 for country_code, data in sorted_countries:
     tweet_content += f"{data['flag_emoji']}    {data['gold']:>4}   {data['silver']:>4}   {data['bronze']:>4}  {data['total']:>4}\n"
 
-response = client.create_tweet(text=tweet_content.strip())
+#response = client.create_tweet(text=tweet_content.strip())
 
 
 
