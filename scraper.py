@@ -16,25 +16,56 @@ if response.status_code == 200:
     
     # Extract and download country flags
     countries = data['data']
-    medal_data = {}
+    medal_data = {} 
+
 
     for country in countries:
-        flag_url = country['flag_url']
-        flag_response = requests.get(flag_url)
-        flag_path = os.path.join(flags_dir, f"{country['id']}.png")
+        medal_data[country['id']]={'gold':country['gold_medals'],'silver':country['silver_medals'],'bronze':country['bronze_medals'],'total':country['total_medals']}
+
+    def country_flag_emoji(country_code):
+        alpha3_to_alpha2 = {
+        "USA": "US", "CHN": "CN", "AUS": "AU", "FRA": "FR", "GBR": "GB", 
+        "KOR": "KR", "JPN": "JP", "NED": "NL", "ITA": "IT", "GER": "DE", 
+        "CAN": "CA", "NZL": "NZ", "IRL": "IE", "ROU": "RO", "UKR": "UA", 
+        "HUN": "HU", "SWE": "SE", "BRA": "BR", "ESP": "ES", "IRI": "IR",
+        "CRO": "HR", "CUB": "CU", "AZE": "AZ", "BEL": "BE", "PHI": "PH",
+        "HKG": "HK", "INA": "ID", "SRB": "RS", "ISR": "IL", "KAZ": "KZ",
+        "JAM": "JM", "THA": "TH", "SUI": "CH", "DEN": "DK", "GEO": "GE",
+        "ECU": "EC", "GRE": "GR", "POL": "PL", "KEN": "KE", "RSA": "ZA",
+        "ARG": "AR", "CHI": "CL", "LCA": "LC", "UGA": "UG", "TPE": "TW",
+        "BUL": "BG", "AUT": "AT", "GUA": "GT", "MAR": "MA", "UZB": "UZ"
+    }
         
-        with open(flag_path, 'wb') as f:
-            f.write(flag_response.content)
+        alpha2_code = alpha3_to_alpha2.get(country_code.upper())
+        if not alpha2_code:
+            return None
+
+
+        flag_emoji=chr(ord(alpha2_code[0]) + 127397) + chr(ord(alpha2_code[1]) + 127397)
+        return flag_emoji
+    
+    # for country in countries:
+    #     flag_url = country['flag_url']
+    #     flag_response = requests.get(flag_url)
+    #     flag_path = os.path.join(flags_dir, f"{country['id']}.png")
         
-        medal_data[country['id']] = [country['gold_medals'], flag_path]
+    #     with open(flag_path, 'wb') as f:
+    #         f.write(flag_response.content)
+        
+    #     medal_data[country['id']] = [country['gold_medals'], flag_path]
 
     # Save medal_data to a file (e.g., JSON) if needed
     # Example: save to medal_data.json
-    import json
-    with open('medal_data.json', 'w') as f:
-        json.dump(medal_data, f)
+    # import json
+    # with open('medal_data.json', 'w') as f:
+    #     json.dump(medal_data, f)
 else:
     print("Failed to fetch data")
+
+
+
+print(medal_data)
+    
 
 #medal_data={}
 
