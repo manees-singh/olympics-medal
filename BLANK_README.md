@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![LinkedIn][linkedin-shield]][[linkedin-url](https://www.linkedin.com/in/manish-singh2/)]
+[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/manish-singh2/]
 
 
 
