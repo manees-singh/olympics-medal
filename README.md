@@ -37,8 +37,8 @@ This project contains a Python-based Twitter bot that tracks Olympic medals and 
 
 1. Clone this repository to your local machine:
     ```bash
-    git clone https://github.com/your-username/olympics-medal-tracker.git
-    cd olympics-medal-tracker
+    git clone https://github.com/your-username/olympics-medal.git
+    cd olympics-medal
     ```
 
 2. Install the required Python packages:
@@ -58,4 +58,26 @@ This project contains a Python-based Twitter bot that tracks Olympic medals and 
     python scraper.py
     ```
 
-5. Run the bot
+5. Run the bot script to post an update on Twitter:
+    ```bash
+    python bot.py
+    ```
+
+### GitHub Actions Workflow
+
+The bot is set up to run on a regular schedule using GitHub Actions. The workflow file `schedule.yml` runs the scraper and bot scripts every 2 hours between 8 AM and 8 PM.
+
+## Customization
+
+- Modify the `scraper.py` script to add more countries or change the API endpoint.
+- Adjust the `bot.py` script to change the tweet format or include additional data.
+- Update the `schedule.yml` file to adjust the schedule as needed.
+
+## Contributing
+
+Feel free to fork this repository and make your own improvements. Pull requests are welcome!
+
+## License
+
+This project is licensed under the MIT License. See the [MIT](LICENSE) file for details.
+
