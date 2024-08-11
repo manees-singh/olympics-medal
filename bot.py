@@ -37,7 +37,7 @@ sorted_countries = sorted(medal_data.items(), key=lambda x: x[1]['total'], rever
 
 
 # Creates the tweet content
-tweet_content= "#Olympics2024\n#Paris2024\n\n           🥇     🥈    🥉     =\n" # header for the tweet
+tweet_content= "#Olympics2024\nFinal medal tally\n\n           🥇     🥈    🥉     =\n" # header for the tweet
 
 # Loops to insert the data into the tweet
 for country_code, data in sorted_countries:
