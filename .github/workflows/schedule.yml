@@ -2,7 +2,12 @@ name: Run Twitter Bot
 
 on:
   schedule:
-    - cron: '0 6,8,10,12,14,16,18,20,22 * * *'
+  #Runs every two hours from 6 am to 10pm from earlier date to 11th August
+    - cron: '0 6,8,10,12,14,16,18,20,22 1-11 * *'
+
+    #Runs only once on August 12
+    - cron: '0 6 12 **'
+  
   workflow_dispatch:
 
 jobs:
